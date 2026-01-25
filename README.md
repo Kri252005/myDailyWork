@@ -16,4 +16,4 @@ A sleek, minimalist To-Do List application built with **Python** and **Flask**. 
 ## 🚀 How to Run Locally
 1. **Clone the repository**:
    ```bash
-   git clone 
+   git clone [https://github.com/Kri252005/myDailyWork.git]
