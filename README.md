@@ -1,4 +1,4 @@
-# 🌹 Rose Planner - Task Management Web App
+# 🌹 TO-DO LIST - Task Management Web App
 
 A sleek, minimalist To-Do List application built with **Python** and **Flask**. This project was designed to help users efficiently **Create**, **Update**, and **Track** their daily tasks through a responsive web interface.
 
