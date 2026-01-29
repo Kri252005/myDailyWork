@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Generator</title>
+
+    <style>
+        body {
+            background-color: #0f172a;
+            font-family: "Segoe UI", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: #111827;
+            width: 460px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        h2 {
+            text-align: center;
+            color: #38bdf8;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        label {
+            color: #e5e7eb;
+            font-size: 14px;
+            display: block;
+            margin-top: 12px;
+        }
+
+        input[type="number"],
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+            background: #020617;
+            border: none;
+            color: white;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        .options label {
+            margin-top: 8px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 6px;
+            accent-color: #38bdf8;
+        }
+
+        button {
+            margin-top: 22px;
+            width: 100%;
+            padding: 12px;
+            background: #38bdf8;
+            color: #020617;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .error {
+            color: #f87171;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>PASSWORD GENERATOR</h2>
+
+    <form method="POST">
+        <label>Password Length</label>
+        <input type="number" name="length" required>
+
+        <div class="options">
+            <label><input type="checkbox" name="upper"> Include Uppercase Letters</label>
+            <label><input type="checkbox" name="lower"> Include Lowercase Letters</label>
+            <label><input type="checkbox" name="digits"> Include Numbers</label>
+            <label><input type="checkbox" name="symbols"> Include Symbols</label>
+        </div>
+
+        <button type="submit">Generate Password</button>
+    </form>
+
+    {% if password %}
+        <label>Generated Password</label>
+        <input type="text" value="{{ password }}" readonly>
+    {% endif %}
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+</div>
+
+</body>
+</html>
