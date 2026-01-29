@@ -1,45 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Rose Planner</title>
+    <meta charset="UTF-8">
+    <title>Password Generator</title>
+
     <style>
-        /* This is the DESIGN (CSS) */
-        body { background: #120b0e; color: #f3d6dc; font-family: sans-serif; text-align: center; padding: 20px; }
-        h1 { color: #c97c8a; }
-        .card { background: #1b1216; margin: 10px auto; padding: 15px; border-radius: 8px; max-width: 400px; }
-        .done-text { text-decoration: line-through; color: #666; }
-        .btn-add { background: #c97c8a; border: none; padding: 10px; cursor: pointer; color: #120b0e; font-weight: bold; }
-        .link-done { color: #c97c8a; text-decoration: none; margin-right: 10px; }
-        .link-del { color: #ff4d4d; text-decoration: none; }
+        body {
+            background-color: #0f172a;
+            font-family: "Segoe UI", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: #111827;
+            width: 460px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        h2 {
+            text-align: center;
+            color: #38bdf8;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        label {
+            color: #e5e7eb;
+            font-size: 14px;
+            display: block;
+            margin-top: 12px;
+        }
+
+        input[type="number"],
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+            background: #020617;
+            border: none;
+            color: white;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        .options label {
+            margin-top: 8px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 6px;
+            accent-color: #38bdf8;
+        }
+
+        button {
+            margin-top: 22px;
+            width: 100%;
+            padding: 12px;
+            background: #38bdf8;
+            color: #020617;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .error {
+            color: #f87171;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 13px;
+        }
     </style>
 </head>
+
 <body>
-    <h1>Rose Planner</h1>
-    
-    <form action="/add" method="POST">
-        <input name="task" placeholder="New task..." required>
-        <button type="submit" class="btn-add">Add</button>
-    </form>
 
-    <hr style="border: 0.5px solid #2a1a1f; margin: 20px;">
+<div class="card">
+    <h2>PASSWORD GENERATOR</h2>
 
-    {% for task in tasks %}
-    <div class="card">
-        <div style="display: flex; justify-content: space-between;">
-            <span class="{{ 'done-text' if task.done else '' }}">
-                {{ "✔ " if task.done else "" }} {{ task.text }}
-            </span>
-            <div>
-                <a href="/done/{{ loop.index0 }}" class="link-done">Done</a>
-                <a href="/delete/{{ loop.index0 }}" class="link-del">Delete</a>
-            </div>
+    <form method="POST">
+        <label>Password Length</label>
+        <input type="number" name="length" required>
+
+        <div class="options">
+            <label><input type="checkbox" name="upper"> Include Uppercase Letters</label>
+            <label><input type="checkbox" name="lower"> Include Lowercase Letters</label>
+            <label><input type="checkbox" name="digits"> Include Numbers</label>
+            <label><input type="checkbox" name="symbols"> Include Symbols</label>
         </div>
 
-        <form action="/edit/{{ loop.index0 }}" method="POST" style="margin-top: 10px;">
-            <input name="new_text" style="width: 70%;" placeholder="Change name...">
-            <button type="submit">Update</button>
-        </form>
-    </div>
-    {% endfor %}
+        <button type="submit">Generate Password</button>
+    </form>
+
+    {% if password %}
+        <label>Generated Password</label>
+        <input type="text" value="{{ password }}" readonly>
+    {% endif %}
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+</div>
+
 </body>
 </html>

@@ -7,7 +7,7 @@ tasks = []
 
 @app.route('/')
 def index():
-    return render_template('index.html', tasks=tasks)
+    return render_template('todo.html', tasks=tasks)
 
 @app.route('/add', methods=['POST'])
 def add():
@@ -34,4 +34,4 @@ def delete(index):
     return redirect('/')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TO-DO LIST</title>
+    <style>
+        /* This is the DESIGN (CSS) */
+        body { background: #120b0e; color: #f3d6dc; font-family: sans-serif; text-align: center; padding: 20px; }
+        h1 { color: #c97c8a; }
+        .card { background: #1b1216; margin: 10px auto; padding: 15px; border-radius: 8px; max-width: 400px; }
+        .done-text { text-decoration: line-through; color: #666; }
+        .btn-add { background: #c97c8a; border: none; padding: 10px; cursor: pointer; color: #120b0e; font-weight: bold; }
+        .link-done { color: #c97c8a; text-decoration: none; margin-right: 10px; }
+        .link-del { color: #ff4d4d; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <h1>TO-DO LIST</h1>
+    
+    <form action="/add" method="POST">
+        <input name="task" placeholder="New task..." required>
+        <button type="submit" class="btn-add">Add</button>
+    </form>
+
+    <hr style="border: 0.5px solid #2a1a1f; margin: 20px;">
+
+    {% for task in tasks %}
+    <div class="card">
+        <div style="display: flex; justify-content: space-between;">
+            <span class="{{ 'done-text' if task.done else '' }}">
+                {{ "✔ " if task.done else "" }} {{ task.text }}
+            </span>
+            <div>
+                <a href="/done/{{ loop.index0 }}" class="link-done">Done</a>
+                <a href="/delete/{{ loop.index0 }}" class="link-del">Delete</a>
+            </div>
+        </div>
+
+        <form action="/edit/{{ loop.index0 }}" method="POST" style="margin-top: 10px;">
+            <input name="new_text" style="width: 70%;" placeholder="Change name...">
+            <button type="submit">Update</button>
+        </form>
+    </div>
+    {% endfor %}
+</body>
+</html>
